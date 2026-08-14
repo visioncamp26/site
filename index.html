@@ -8,26 +8,28 @@
 
   <style>
     :root {
-      --green: #0B3D2E;
+      --primary: #0B3D2E;
+      --secondary: #F4F1E8;
       --white: #FFFFFF;
-      --light: #F2F2F2;
+      --text: #111111;
       --border: #D9D9D9;
     }
 
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
-      background-color: var(--light);
+      background-color: var(--white);
       margin: 0;
+      color: var(--text);
     }
 
     #container {
-      background: var(--green);
+      background-color: var(--primary);
       padding: 20px;
       border-radius: 8px;
       max-width: 650px;
       margin: auto;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
       color: var(--white);
     }
 
@@ -43,8 +45,8 @@
       margin-top: 10px;
       border: 1px solid var(--border);
       border-radius: 4px;
-      background: var(--white);
-      color: black;
+      background-color: var(--white);
+      color: var(--text);
       font-size: 16px;
     }
 
@@ -52,8 +54,8 @@
       margin-top: 10px;
       width: 100%;
       padding: 10px;
-      background-color: var(--white);
-      color: var(--green);
+      background-color: var(--secondary);
+      color: var(--primary);
       border: none;
       border-radius: 4px;
       cursor: pointer;
@@ -62,7 +64,7 @@
     }
 
     button:hover {
-      background-color: #e8e8e8;
+      background-color: #E8E3D8;
     }
 
     #result {
@@ -70,8 +72,8 @@
     }
 
     .songs {
-      background-color: var(--white);
-      color: var(--green);
+      background-color: var(--secondary);
+      color: var(--primary);
       padding: 10px;
       border-radius: 6px;
       margin-bottom: 10px;
@@ -80,7 +82,7 @@
     }
 
     .songs a {
-      color: var(--green);
+      color: var(--primary);
       text-decoration: underline;
     }
 
@@ -88,7 +90,7 @@
       background-color: var(--white);
       padding: 15px;
       border-radius: 8px;
-      color: var(--green);
+      color: var(--primary);
       margin-bottom: 15px;
       font-size: 0.95em;
     }
@@ -100,7 +102,7 @@
     }
 
     nav a {
-      color: var(--green);
+      color: var(--primary);
       text-decoration: none;
       margin: 0 10px;
     }
@@ -110,15 +112,14 @@
     }
 
     .not-found {
-      color: var(--green);
-      background-color: var(--white);
+      color: var(--primary);
+      background-color: var(--secondary);
       padding: 10px;
       border-radius: 6px;
       font-weight: bold;
     }
   </style>
 </head>
-
 <body>
 
   <nav>
