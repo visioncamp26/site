@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Don't You Give Up On Me — VISION '26</title>
+
+  <style>
+    :root {
+      --primary: #0B3D2E;
+      --secondary: #F4F1E8;
+      --white: #FFFFFF;
+      --text: #111111;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 15px;
+      background: var(--white);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
+
+    nav {
+      text-align: center;
+      margin-bottom: 15px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: var(--primary);
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    #song-container {
+      max-width: 850px;
+      margin: auto;
+    }
+
+    .header {
+      background: var(--primary);
+      color: var(--white);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .header h1 {
+      margin: 0 0 8px 0;
+    }
+
+    .group {
+      opacity: 0.9;
+      margin-bottom: 5px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+
+    .controls button {
+      flex: 1;
+      min-width: 100px;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      background: var(--primary);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .controls button:hover {
+      opacity: 0.85;
+    }
+
+    #song {
+      background: var(--secondary);
+      padding: 20px;
+      border-radius: 10px;
+      overflow-x: auto;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .section {
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.15em;
+      margin-top: 25px;
+      margin-bottom: 12px;
+    }
+
+    .chord-line {
+      color: var(--primary);
+      font-weight: bold;
+      white-space: pre-wrap;
+      margin-bottom: 0;
+    }
+
+    .lyric-line {
+      white-space: pre-wrap;
+      margin-bottom: 10px;
+    }
+
+    .empty {
+      height: 10px;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+
+      #song {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <a href="../index.html">Начало</a> |
+  <a href="../vision2025-schedule.html">Програма</a> |
+  <a href="../songs.html">Песни</a>
+</nav>
+
+<div id="song-container">
+
+  <div class="header">
+    <h1>Don't You Give Up On Me</h1>
+    <div class="group">Джан и Дани</div>
+    <div>Key: G</div>
+  </div>
+
+  <div class="controls">
+    <button onclick="changeFont(-1)">A−</button>
+    <button onclick="changeFont(1)">A+</button>
+    <button onclick="transpose(1)">Transpose +</button>
+    <button onclick="transpose(-1)">Transpose −</button>
+  </div>
+
+  <div id="song">
+    <div class="section">
+      SONG CONTENT
+    </div>
+
+    <div class="lyric-line">
+      We will put the chords and lyrics here.
+    </div>
+
+    <div class="lyric-line">
+      For now this is only a test.
+    </div>
+  </div>
+
+</div>
+
+<script>
+
+let fontSize = 16;
+
+function changeFont(amount) {
+  fontSize += amount;
+
+  if (fontSize < 12) fontSize = 12;
+  if (fontSize > 28) fontSize = 28;
+
+  document.getElementById("song").style.fontSize = fontSize + "px";
+}
+
+function transpose(amount) {
+  /*
+    We'll add the real chord-transposing system
+    once the song content is inserted.
+  */
+}
+
+</script>
+
+</body>
+</html>
