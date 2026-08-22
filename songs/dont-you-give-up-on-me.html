@@ -20,7 +20,7 @@
 
     body {
       margin: 0;
-      padding: 15px;
+      padding: 12px;
       background: var(--white);
       color: var(--text);
       font-family: Arial, sans-serif;
@@ -28,14 +28,14 @@
 
     nav {
       text-align: center;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       font-weight: bold;
     }
 
     nav a {
       color: var(--primary);
       text-decoration: none;
-      margin: 0 8px;
+      margin: 0 7px;
     }
 
     nav a:hover {
@@ -43,45 +43,56 @@
     }
 
     #song-container {
+      width: 100%;
       max-width: 850px;
-      margin: auto;
+      margin: 0 auto;
     }
+
+    /* HEADER */
 
     .header {
       background: var(--primary);
       color: var(--white);
-      padding: 18px;
+      padding: 16px;
       border-radius: 10px;
       text-align: center;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .header h1 {
-      margin: 0 0 6px 0;
-      font-size: 1.6em;
+      margin: 0 0 5px;
+      font-size: 1.5rem;
     }
 
     .group {
       opacity: 0.9;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
+
+    #keyDisplay {
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+
+    /* CONTROLS */
 
     .controls {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .controls button {
       flex: 1 1 calc(50% - 4px);
       min-width: 0;
-      padding: 10px;
+      padding: 10px 6px;
       border: none;
       border-radius: 6px;
       background: var(--primary);
       color: white;
       font-weight: bold;
+      font-size: 14px;
       cursor: pointer;
     }
 
@@ -89,68 +100,83 @@
       opacity: 0.85;
     }
 
+    /* SONG */
+
     #song {
       background: var(--secondary);
-      padding: 18px;
+      padding: 15px;
       border-radius: 10px;
+
+      /*
+        IMPORTANT:
+        The song uses spaces to position chords.
+        These settings preserve those spaces.
+      */
+      font-family: "Courier New", Courier, monospace;
+      white-space: pre;
       overflow-x: auto;
-      font-family: Arial, sans-serif;
+
       font-size: 16px;
+      line-height: 1.1;
     }
 
     .section {
       color: var(--primary);
+      font-family: Arial, sans-serif;
       font-weight: bold;
-      font-size: 1.1em;
-      margin-top: 18px;
-      margin-bottom: 8px;
+      font-size: 1rem;
+
+      margin-top: 14px;
+      margin-bottom: 5px;
     }
 
-    .chorded-line {
-  margin-bottom: 7px;
-  font-family: "Courier New", monospace;
-}
-
-.chords {
-  color: var(--primary);
-  font-weight: bold;
-  white-space: pre;
-  line-height: 1.05;
-  height: 17px;
-}
-
-.lyrics {
-  white-space: pre;
-  line-height: 1.15;
-}
-    .empty {
-      height: 5px;
+    .chord-line {
+      color: var(--primary);
+      font-weight: bold;
+      line-height: 1;
     }
+
+    .lyric-line {
+      line-height: 1.15;
+    }
+
+    .normal-line {
+      line-height: 1.15;
+    }
+
+    .empty-line {
+      height: 4px;
+    }
+
+    /* PHONE */
 
     @media (max-width: 600px) {
+
       body {
-        padding: 8px;
+        padding: 7px;
       }
 
       #song {
-        padding: 13px;
-        font-size: 15px;
+        padding: 11px;
+        font-size: 14px;
       }
 
       .header {
-        padding: 15px;
+        padding: 14px;
       }
 
       .header h1 {
-        font-size: 1.4em;
+        font-size: 1.35rem;
       }
 
-      .chorded-line {
-        margin-bottom: 5px;
+      .controls button {
+        padding: 9px 5px;
+        font-size: 13px;
       }
 
-      .chords {
-        height: 16px;
+      .section {
+        margin-top: 12px;
+        margin-bottom: 4px;
       }
     }
   </style>
@@ -158,43 +184,48 @@
 
 <body>
 
-<nav>
-  <a href="../index.html">Начало</a> |
-  <a href="../vision2025-schedule.html">Програма</a> |
-  <a href="../songs.html">Песни</a>
-</nav>
+  <nav>
+    <a href="../index.html">Начало</a> |
+    <a href="../vision2025-schedule.html">Програма</a> |
+    <a href="../songs.html">Песни</a>
+  </nav>
 
-<div id="song-container">
+  <div id="song-container">
 
-  <div class="header">
-    <h1>Don't You Give Up On Me</h1>
-    <div class="group">Джан и Дани</div>
-    <div id="keyDisplay">Key: G</div>
+    <div class="header">
+      <h1>Don't You Give Up On Me</h1>
+      <div class="group">Джан и Дани</div>
+      <div id="keyDisplay">Key: G</div>
+    </div>
+
+    <div class="controls">
+      <button onclick="changeFont(1)">A+</button>
+      <button onclick="changeFont(-1)">A−</button>
+      <button onclick="transpose(1)">Transpose +</button>
+      <button onclick="transpose(-1)">Transpose −</button>
+    </div>
+
+    <div id="song"></div>
+
   </div>
 
-  <div class="controls">
-    <button onclick="changeFont(1)">A+</button>
-    <button onclick="changeFont(-1)">A−</button>
-    <button onclick="transpose(1)">Transpose +</button>
-    <button onclick="transpose(-1)">Transpose −</button>
-  </div>
 
-  <div id="song"></div>
+  <script>
 
-</div>
+    /*
+    ============================================================
+    SONG CONTENT
+    ============================================================
+    */
 
-<script>
-
-const songContent = `
-
-```
+    const songContent = `
 [Интро]
- 
+
 C Em D
 C Em D
- 
+
 [Куплет 1]
- 
+
           C
 I see you child
            Em         D
@@ -211,41 +242,41 @@ Though I answered all the time
 You just didn't hear my reply
                     D
 And I know it's not easy, oh
- 
+
 [Припев]
- 
-G                      
+
+G
   Don't you give up on me
-D                     
+D
   Don't you give up on me
 C
  'Cause the darker the night gets
 Em    D
    The brighter the light hits
-G                      
+G
   Don't you give up on me
-D                     
+D
   Don't you give up on me
 C
  You ain't seen what I promised
 Em             D
    Child, we're just getting started
- 
+
 [След-припев]
- 
+
 C   Em   D
  Oh-oh-oh-oh
                  C
 There is so much more
    Em   D
 Oh-oh-oh-oh
- 
+
 [Куплет 2]
- 
+
              C
 I'll be your way
              Em       D
-When thеre's no way out
+When there's no way out
                  C
 And I'll be your strength
           Em              D
@@ -258,27 +289,28 @@ I'll be right there in the flames
 I wouldn't have it any other way
 Em                    D
    'Cause loving you's easy, yeah
- 
+
 [Припев]
- 
-G                      
+
+G
   Don't you give up on me
-D                     
+D
   Don't you give up on me
 C
  'Cause when the night's at its darkest
 Em                D
    That's when the light hits the hardest
-G                      
+G
   Don't you give up on me
-D                     
+D
   Don't you give up on me
 C
  You ain't seen what I promised
-Em             D                   G
+Em             D
    Child, we're just getting started
- 
+
 [Бридж]
+
 G                   Em     D                  G
  Open your heart, open your hands, open your eyelids
 C                                    Em                  D
@@ -295,9 +327,9 @@ C                                      Em                      D
  Don't lose your hope, don't lose your faith, that's where your fight is
 C                                    Em             D
  I've got more dreams, I've got more plans, I've got blessings
- 
+
 [Бридж 2]
- 
+
 C          Em
  Oh-oh, oh-oh
          D      C
@@ -314,27 +346,28 @@ There is so much more
 So much, so much
 D
 So much more
- 
+
 [Припев]
-G                     
+
+G
  Don't you give up on me
-D                     
+D
   Don't you give up on me
 C
  When the night's at its darkest
 Em                D
    That's when the light hits the hardest
-G                     
+G
  Don't you give up on me
-D                     
+D
   Don't you give up on me
 C
  'Cause you ain't seen what I promised
 Em             D
    Child, we're just getting started
- 
+
 [Аутро]
- 
+
 C                           Em              D
  Open your heart, open your hands, open your eyelids
 C                                    Em                  D
@@ -347,200 +380,279 @@ G                     Em
  Don't you give up on me
 D                        G
   Don't you give up on me
-
-```
-
-X
 `;
 
-const chromatic = [
-  "C", "C#", "D", "D#", "E", "F",
-  "F#", "G", "G#", "A", "A#", "B"
-];
-
-let transposeAmount = 0;
-let fontSize = 16;
-
-function transposeChord(chord, amount) {
-
-  const match = chord.match(/^([A-G](?:#|b)?)(m?)$/);
-
-  if (!match) return chord;
-
-  let root = match[1];
-  const suffix = match[2];
-
-  const flatMap = {
-    "Db": "C#",
-    "Eb": "D#",
-    "Gb": "F#",
-    "Ab": "G#",
-    "Bb": "A#"
-  };
-
-  root = flatMap[root] || root;
-
-  let index = chromatic.indexOf(root);
-
-  if (index === -1) return chord;
-
-  index = (index + amount + 12) % 12;
-
-  return chromatic[index] + suffix;
-}
-
-function transposeChordLine(line, amount) {
-
-  return line.replace(
-    /\b([A-G](?:#|b)?m?)\b/g,
-    function(match) {
-      return transposeChord(match, amount);
-    }
-  );
-}
-
-function isChordLine(line) {
-
-  const trimmed = line.trim();
-
-  if (!trimmed) return false;
-
-  const parts = trimmed.split(/\s+/);
-
-  return parts.every(part =>
-    /^[A-G](?:#|b)?m?$/.test(part)
-  );
-}
-
-function renderSong() {
-
-  const song = document.getElementById("song");
-
-  song.innerHTML = "";
-
-  const lines = songContent
-    .replace(/\r/g, "")
-    .split("\n");
-
-  let i = 0;
-
-  while (i < lines.length) {
-
-    const line = lines[i];
-
-    if (line.trim() === "") {
-
-      const empty = document.createElement("div");
-      empty.className = "empty";
-      song.appendChild(empty);
-
-      i++;
-      continue;
-    }
-
-    if (
-      line.trim().startsWith("[") &&
-      line.trim().endsWith("]")
-    ) {
-
-      const section = document.createElement("div");
-
-      section.className = "section";
-
-      section.textContent =
-        line.trim().slice(1, -1);
-
-      song.appendChild(section);
-
-      i++;
-      continue;
-    }
 
     /*
-      Chord line followed by lyric line.
+    ============================================================
+    TRANSPOSE
+    ============================================================
     */
 
-    if (
-      isChordLine(line) &&
-      i + 1 < lines.length &&
-      lines[i + 1].trim() !== ""
-    ) {
+    const chromatic = [
+      "C",
+      "C#",
+      "D",
+      "D#",
+      "E",
+      "F",
+      "F#",
+      "G",
+      "G#",
+      "A",
+      "A#",
+      "B"
+    ];
 
-      const chordedLine =
-        document.createElement("div");
+    const flatMap = {
+      "Db": "C#",
+      "Eb": "D#",
+      "Gb": "F#",
+      "Ab": "G#",
+      "Bb": "A#"
+    };
 
-      chordedLine.className = "chorded-line";
+    let transposeAmount = 0;
+    let fontSize = 16;
 
-      const chords =
-        document.createElement("div");
 
-      chords.className = "chords";
+    function transposeChord(chord, amount) {
 
-      chords.textContent =
-        transposeChordLine(line, transposeAmount);
+      const match = chord.match(
+        /^([A-G](?:#|b)?)(m?)$/
+      );
 
-      const lyrics =
-        document.createElement("div");
+      if (!match) {
+        return chord;
+      }
 
-      lyrics.className = "lyrics";
+      let root = match[1];
+      const suffix = match[2];
 
-      lyrics.textContent =
-        lines[i + 1].trim();
+      root = flatMap[root] || root;
 
-      chordedLine.appendChild(chords);
-      chordedLine.appendChild(lyrics);
+      let index = chromatic.indexOf(root);
 
-      song.appendChild(chordedLine);
+      if (index === -1) {
+        return chord;
+      }
 
-      i += 2;
-      continue;
+      index =
+        (index + amount + 12) % 12;
+
+      return chromatic[index] + suffix;
     }
 
+
     /*
-      Lyrics without a chord line.
+    Transpose ONLY actual chords.
+
+    Every chord keeps its exact position
+    because the spaces before and after it
+    remain untouched.
     */
 
-    const lyrics =
-      document.createElement("div");
+    function transposeChordLine(line) {
 
-    lyrics.className = "lyrics";
+      return line.replace(
+        /(?<![A-Za-z])([A-G](?:#|b)?m?)(?![A-Za-z])/g,
+        function(match) {
 
-    lyrics.style.marginBottom = "7px";
+          return transposeChord(
+            match,
+            transposeAmount
+          );
 
-    lyrics.textContent =
-      line.trim();
+        }
+      );
+    }
 
-    song.appendChild(lyrics);
 
-    i++;
+    /*
+    ============================================================
+    RENDER
+    ============================================================
+    */
 
-  }
+    function renderSong() {
 
-  document.getElementById("keyDisplay").textContent =
-    "Key: " + transposeChord("G", transposeAmount);
-}
+      const song =
+        document.getElementById("song");
 
-function transpose(amount) {
+      song.innerHTML = "";
 
-  transposeAmount += amount;
+      const lines =
+        songContent
+          .replace(/\r/g, "")
+          .split("\n");
 
-  renderSong();
-}
+      lines.forEach(function(line) {
 
-function changeFont(amount) {
+        const trimmed =
+          line.trim();
 
-  fontSize += amount;
 
-  if (fontSize < 12) fontSize = 12;
-  if (fontSize > 28) fontSize = 28;
+        /*
+        Empty line
+        */
 
-  document.getElementById("song").style.fontSize =
-    fontSize + "px";
-}
+        if (trimmed === "") {
 
-renderSong();
+          const empty =
+            document.createElement("div");
 
-</script>
+          empty.className =
+            "empty-line";
+
+          song.appendChild(empty);
+
+          return;
+        }
+
+
+        /*
+        Section
+        */
+
+        if (
+          trimmed.startsWith("[") &&
+          trimmed.endsWith("]")
+        ) {
+
+          const section =
+            document.createElement("div");
+
+          section.className =
+            "section";
+
+          section.textContent =
+            trimmed.slice(1, -1);
+
+          song.appendChild(section);
+
+          return;
+        }
+
+
+        /*
+        Determine whether this is a chord-only line.
+        */
+
+        const chordOnly =
+          trimmed
+            .split(/\s+/)
+            .every(function(part) {
+
+              return /^[A-G](?:#|b)?m?$/.test(part);
+
+            });
+
+
+        /*
+        Chord line
+        */
+
+        if (chordOnly) {
+
+          const chordLine =
+            document.createElement("div");
+
+          chordLine.className =
+            "song-line chord-line";
+
+          chordLine.textContent =
+            transposeChordLine(line);
+
+          song.appendChild(chordLine);
+
+          return;
+        }
+
+
+        /*
+        Normal lyric line.
+        */
+
+        const lyricLine =
+          document.createElement("div");
+
+        lyricLine.className =
+          "song-line lyric-line";
+
+        lyricLine.textContent =
+          line;
+
+        song.appendChild(lyricLine);
+
+      });
+
+
+      /*
+      Update displayed key
+      */
+
+      document.getElementById(
+        "keyDisplay"
+      ).textContent =
+        "Key: " +
+        transposeChord(
+          "G",
+          transposeAmount
+        );
+
+    }
+
+
+    /*
+    ============================================================
+    FONT SIZE
+    ============================================================
+    */
+
+    function changeFont(amount) {
+
+      fontSize += amount;
+
+      if (fontSize < 12) {
+        fontSize = 12;
+      }
+
+      if (fontSize > 28) {
+        fontSize = 28;
+      }
+
+      document.getElementById(
+        "song"
+      ).style.fontSize =
+        fontSize + "px";
+
+    }
+
+
+    /*
+    ============================================================
+    TRANSPOSE BUTTONS
+    ============================================================
+    */
+
+    function transpose(amount) {
+
+      transposeAmount += amount;
+
+      renderSong();
+
+    }
+
+
+    /*
+    ============================================================
+    START
+    ============================================================
+    */
+
+    renderSong();
+
+  </script>
 
 </body>
 </html>
