@@ -73,16 +73,16 @@
     }
 
     .controls button {
-  flex: 1 1 calc(50% - 4px);
-  min-width: 0;
-  padding: 10px;
-  border: none;
-  border-radius: 6px;
-  background: var(--primary);
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
+      flex: 1 1 calc(50% - 4px);
+      min-width: 0;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      background: var(--primary);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
     .controls button:hover {
       opacity: 0.85;
@@ -105,20 +105,18 @@
       margin-bottom: 12px;
     }
 
-    .chord-line {
-      color: var(--primary);
-      font-weight: bold;
+    .song-line {
+      margin-bottom: 10px;
       white-space: pre-wrap;
-      margin-bottom: 0;
     }
 
-    .lyric-line {
-      white-space: pre-wrap;
-      margin-bottom: 10px;
+    .chord {
+      color: var(--primary);
+      font-weight: bold;
     }
 
     .empty {
-      height: 10px;
+      height: 8px;
     }
 
     @media (max-width: 600px) {
@@ -146,51 +144,397 @@
   <div class="header">
     <h1>Don't You Give Up On Me</h1>
     <div class="group">Джан и Дани</div>
-    <div>Key: G</div>
+    <div id="keyDisplay">Key: G</div>
   </div>
 
   <div class="controls">
-    <button onclick="changeFont(-1)">A +</button>
-    <button onclick="changeFont(1)">A −</button>
+    <button onclick="changeFont(1)">A+</button>
+    <button onclick="changeFont(-1)">A−</button>
     <button onclick="transpose(1)">Transpose +</button>
     <button onclick="transpose(-1)">Transpose −</button>
   </div>
 
-  <div id="song">
-    <div class="section">
-      SONG CONTENT
-    </div>
-
-    <div class="lyric-line">
-      We will put the chords and lyrics here.
-    </div>
-
-    <div class="lyric-line">
-      For now this is only a test.
-    </div>
-  </div>
+  <div id="song"></div>
 
 </div>
 
 <script>
 
+const songContent = `
+
+[Интро]
+
+[C] [Em] [D]
+[C] [Em] [D]
+
+[Куплет 1]
+
+[C]
+I see you child
+
+[Em] [D]
+Though you can't see me
+
+[C]
+And I know your thoughts
+
+[Em] [D]
+Before you even think
+
+[C]
+I heard every last prayer you prayed
+
+[Em] [D]
+Though I answered all the time
+
+[C] [Em]
+You just didn't hear my reply
+
+[D]
+And I know it's not easy, oh
+
+[Припев]
+
+[G]
+Don't you give up on me
+
+[D]
+Don't you give up on me
+
+[C]
+'Cause the darker the night gets
+
+[Em] [D]
+The brighter the light hits
+
+[G]
+Don't you give up on me
+
+[D]
+Don't you give up on me
+
+[C]
+You ain't seen what I promised
+
+[Em] [D]
+Child, we're just getting started
+
+[След-припев]
+
+[C] [Em] [D]
+Oh-oh-oh-oh
+
+[C]
+There is so much more
+
+[Em] [D]
+Oh-oh-oh-oh
+
+[Куплет 2]
+
+[C]
+I'll be your way
+
+[Em] [D]
+When there's no way out
+
+[C]
+And I'll be your strength
+
+[Em] [D]
+When your strength runs out
+
+[G] [C]
+And if you walk into the fire
+
+[Em] [D]
+I'll be right there in the flames
+
+[C]
+I wouldn't have it any other way
+
+[Em] [D]
+'Cause loving you's easy, yeah
+
+[Припев]
+
+[G]
+Don't you give up on me
+
+[D]
+Don't you give up on me
+
+[C]
+'Cause when the night's at its darkest
+
+[Em] [D]
+That's when the light hits the hardest
+
+[G]
+Don't you give up on me
+
+[D]
+Don't you give up on me
+
+[C]
+You ain't seen what I promised
+
+[Em] [D]
+Child, we're just getting started
+
+[Бридж]
+
+[G] [Em] [D] [G]
+Open your heart, open your hands, open your eyelids
+
+[C] [Em] [D]
+I've got more dreams, I've got more plans, I've got more blessing
+
+[G] [Em] [D] [G]
+Don't lose your hope, don't lose your faith, that's where your fight is
+
+[C] [Em] [D]
+I've got more dreams, I've got more plans, I've got more blessings
+
+[C] [Em] [D]
+Open your heart, open your hands, open your eyelids
+
+[C] [Em] [D]
+I've got more dreams, I've got more plans, I've got more blessings
+
+[C] [Em] [D]
+Don't lose your hope, don't lose your faith, that's where your fight is
+
+[C] [Em] [D]
+I've got more dreams, I've got more plans, I've got blessings
+
+[Бридж 2]
+
+[C] [Em]
+Oh-oh, oh-oh
+
+[D] [C]
+There is so much more
+
+[Em]
+Oh-oh, oh-oh
+
+[D] [C]
+There is so much more
+
+[Em]
+Oh-oh, oh-oh
+
+[D] [C]
+There is so much more
+
+[Em]
+So much, so much
+
+[D]
+So much more
+
+[Припев]
+
+[G]
+Don't you give up on me
+
+[D]
+Don't you give up on me
+
+[C]
+When the night's at its darkest
+
+[Em] [D]
+That's when the light hits the hardest
+
+[G]
+Don't you give up on me
+
+[D]
+Don't you give up on me
+
+[C]
+'Cause you ain't seen what I promised
+
+[Em] [D]
+Child, we're just getting started
+
+[Аутро]
+
+[C] [Em] [D]
+Open your heart, open your hands, open your eyelids
+
+[C] [Em] [D]
+I've got more dreams, I've got more plans, I've got more blessings
+
+[C] [Em] [D]
+And open your heart, open your hands, open your eyelids
+
+[C] [Em] [D]
+I've got more dreams, I've got more plans, I've got more blessings
+
+[G] [Em]
+Don't you give up on me
+
+[D] [G]
+Don't you give up on me
+
+`;
+
+const chromatic = [
+  "C", "C#", "D", "D#", "E", "F",
+  "F#", "G", "G#", "A", "A#", "B"
+];
+
+let transposeAmount = 0;
 let fontSize = 16;
 
-function changeFont(amount) {
-  fontSize += amount;
+function transposeChord(chord, amount) {
 
-  if (fontSize < 12) fontSize = 12;
-  if (fontSize > 28) fontSize = 28;
+  const match = chord.match(/^([A-G](?:#|b)?)(m?)$/);
 
-  document.getElementById("song").style.fontSize = fontSize + "px";
+  if (!match) return chord;
+
+  let root = match[1];
+  const suffix = match[2];
+
+  const flatMap = {
+    "Db": "C#",
+    "Eb": "D#",
+    "Gb": "F#",
+    "Ab": "G#",
+    "Bb": "A#"
+  };
+
+  root = flatMap[root] || root;
+
+  let index = chromatic.indexOf(root);
+
+  if (index === -1) return chord;
+
+  index = (index + amount + 12) % 12;
+
+  return chromatic[index] + suffix;
+}
+
+function renderSong() {
+
+  const song = document.getElementById("song");
+
+  song.innerHTML = "";
+
+  const lines = songContent.trim().split("\n");
+
+  lines.forEach(line => {
+
+    line = line.trim();
+
+    if (line === "") {
+
+      const empty = document.createElement("div");
+      empty.className = "empty";
+
+      song.appendChild(empty);
+
+      return;
+    }
+
+    if (line.startsWith("[") && line.endsWith("]")) {
+
+      const section = document.createElement("div");
+
+      section.className = "section";
+
+      section.textContent =
+        line.substring(1, line.length - 1);
+
+      song.appendChild(section);
+
+      return;
+    }
+
+    const chordMatches = line.match(/\[([A-G](?:#|b)?m?)\]/g);
+
+    if (chordMatches) {
+
+      const chordLine = document.createElement("div");
+
+      chordLine.className = "song-line";
+
+      chordMatches.forEach(chord => {
+
+        const cleanChord =
+          chord.substring(1, chord.length - 1);
+
+        const transposed =
+          transposeChord(cleanChord, transposeAmount);
+
+        const chordSpan =
+          document.createElement("span");
+
+        chordSpan.className = "chord";
+
+        chordSpan.textContent = transposed + "   ";
+
+        chordLine.appendChild(chordSpan);
+
+      });
+
+      song.appendChild(chordLine);
+
+      const lyricLine =
+        document.createElement("div");
+
+      lyricLine.className = "song-line";
+
+      lyricLine.textContent =
+        line.replace(/\[([A-G](?:#|b)?m?)\]/g, "");
+
+      song.appendChild(lyricLine);
+
+    } else {
+
+      const lyricLine =
+        document.createElement("div");
+
+      lyricLine.className = "song-line";
+
+      lyricLine.textContent = line;
+
+      song.appendChild(lyricLine);
+    }
+
+  });
+
+  document.getElementById("keyDisplay").textContent =
+    "Key: " + getCurrentKey();
+}
+
+function getCurrentKey() {
+
+  return transposeChord("G", transposeAmount);
 }
 
 function transpose(amount) {
-  /*
-    We'll add the real chord-transposing system
-    once the song content is inserted.
-  */
+
+  transposeAmount += amount;
+
+  renderSong();
 }
+
+function changeFont(amount) {
+
+  fontSize += amount;
+
+  if (fontSize < 12) fontSize = 12;
+  if (fontSize > 30) fontSize = 30;
+
+  document.getElementById("song").style.fontSize =
+    fontSize + "px";
+}
+
+renderSong();
 
 </script>
 
