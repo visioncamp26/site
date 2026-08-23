@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Нека Господ е на трона — VISION '26</title>
+
+  <style>
+    :root {
+      --primary: #0B3D2E;
+      --secondary: #F4F1E8;
+      --white: #FFFFFF;
+      --text: #111111;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 12px;
+      background: var(--white);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
+
+    nav {
+      text-align: center;
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: var(--primary);
+      text-decoration: none;
+      margin: 0 7px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    #song-container {
+      width: 100%;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: var(--primary);
+      color: var(--white);
+      padding: 16px;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .header h1 {
+      margin: 0 0 5px;
+      font-size: 1.5rem;
+    }
+
+    .group {
+      opacity: 0.9;
+      margin-bottom: 3px;
+    }
+
+    #keyDisplay {
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .controls button {
+      flex: 1 1 calc(50% - 4px);
+      min-width: 0;
+      padding: 10px 6px;
+      border: none;
+      border-radius: 6px;
+      background: var(--primary);
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .controls button:hover {
+      opacity: 0.85;
+    }
+
+    #song {
+      background: var(--secondary);
+      padding: 15px;
+      border-radius: 10px;
+      font-family: "Courier New", Courier, monospace;
+      white-space: pre;
+      overflow-x: auto;
+      font-size: 16px;
+      line-height: 1.1;
+    }
+
+    .section {
+      color: var(--primary);
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      font-size: 1rem;
+      margin-top: 14px;
+      margin-bottom: 5px;
+    }
+
+    .chord-line {
+      color: var(--primary);
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    .lyric-line {
+      line-height: 1.15;
+    }
+
+    .empty-line {
+      height: 4px;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 7px;
+      }
+
+      #song {
+        padding: 11px;
+        font-size: 14px;
+      }
+
+      .header {
+        padding: 14px;
+      }
+
+      .header h1 {
+        font-size: 1.35rem;
+      }
+
+      .controls button {
+        padding: 9px 5px;
+        font-size: 13px;
+      }
+
+      .section {
+        margin-top: 12px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a href="../index.html">Начало</a> |
+    <a href="../vision2025-schedule.html">Програма</a> |
+    <a href="../songs.html">Песни</a>
+  </nav>
+
+  <div id="song-container">
+
+    <div class="header">
+      <h1>Нека Господ е на трона</h1>
+      <div class="group"></div>
+      <div id="keyDisplay">Key: Am</div>
+    </div>
+
+    <div class="controls">
+      <button onclick="changeFont(1)">A+</button>
+      <button onclick="changeFont(-1)">A−</button>
+      <button onclick="transpose(1)">Transpose +</button>
+      <button onclick="transpose(-1)">Transpose −</button>
+    </div>
+
+    <div id="song"></div>
+
+  </div>
+
+  <script>
+
+    const songContent = `
+Am G Am
+
+[Куплет 1]
+
+БОГ НАМЕРИ МЕН, ТОЙ НАМЕРИ ТЕБ,
+ТОЙ ИСКА ДА ИЗЛЕЗНЕМ СЕГА НАПРЕД
+ВЯРАТА ДА БЪДЕ НАШ СТЪЛБ И ОСНОВА.
+БИБЛИЯТА ЖИВА А НЕ ПРОСТО МОДА.
+
+ДУМИТЕ СВЯТОСТ И ЧИСТОТА
+ДА ИМАТ ПРЕДИМСТВО В НАШИТЕ СЪРЦА.
+ИСТИНСКА СВЯТОСТ И РЕВНОСТ ЗА БОГА,
+ИСТИНСКА ВЛАСТ И НЕБЕСНА ПРИРОДА.
+
+[Припев]
+
+НЕКА ГОСПОД Е НА ТРОНА
+ИСКАШ ЛИ ДА ВИДИШ СЛАВАТА
+НЕКА ГОСПОД Е НА ТРОНА
+И БОГ ЧРЕЗ ТЕБ ДА ВЪРШИ ЧУДЕСА
+НЕКА ГОСПОД Е НА ТРОНА
+ПОВДИГНИ ОЧИТЕ СИ - ВИЖ ЖЕРТВАТА
+НЕКА ГОСПОД Е НА ТРОНА
+
+[Куплет 2]
+
+АКО НЯКОЙ ТЕ СПИРА
+И ТЕ СЛАГА ВЪВ РАМКА
+ЩЕ ПЪЛЗИШ ЛИ ПОКОРНО,
+ЩЕ БЪДЕШ ЛИ СЯНКА
+БОГ НЕ ГУБИ ТОЙ САМО ПЕЧЕЛИ.
+ВЪПРОСЪТ Е ТИ КЪДЕ СИ ВЪВ ТЕЗИ ПОБЕДИ
+
+ДАЛИ ПРОСТО ЧАКАШ НЕЩА ДА СЕ СЛУЧВАТ
+ИЛИ ВИКАШ ТАКА, ЧЕ ВСИЧКИ ДА СЛУШАТ
+ЧЕРНОТО - ЧЕРНО И БЯЛОТО - БЯЛО,
+СЛАВАТА МУ ИДВА, ТОВА Е САМО НАЧАЛО
+`;
+
+
+    const chromatic = [
+      "C", "C#", "D", "D#", "E", "F",
+      "F#", "G", "G#", "A", "A#", "B"
+    ];
+
+    const flatMap = {
+      "Db": "C#",
+      "Eb": "D#",
+      "Gb": "F#",
+      "Ab": "G#",
+      "Bb": "A#"
+    };
+
+    let transposeAmount = 0;
+    let fontSize = 16;
+
+
+    function transposeChord(chord, amount) {
+
+      const match = chord.match(
+        /^([A-G](?:#|b)?)(m?)$/
+      );
+
+      if (!match) {
+        return chord;
+      }
+
+      let root = match[1];
+      const suffix = match[2];
+
+      root = flatMap[root] || root;
+
+      let index = chromatic.indexOf(root);
+
+      if (index === -1) {
+        return chord;
+      }
+
+      index =
+        (index + amount + 12) % 12;
+
+      return chromatic[index] + suffix;
+    }
+
+
+    function transposeChordLine(line) {
+
+      return line.replace(
+        /(?<![A-Za-z])([A-G](?:#|b)?m?)(?![A-Za-z])/g,
+        function(match) {
+          return transposeChord(
+            match,
+            transposeAmount
+          );
+        }
+      );
+    }
+
+
+    function isChordLine(line) {
+
+      const trimmed = line.trim();
+
+      if (!trimmed) {
+        return false;
+      }
+
+      const parts = trimmed.split(/\s+/);
+
+      return parts.every(function(part) {
+        return /^[A-G](?:#|b)?m?$/.test(part);
+      });
+    }
+
+
+    function renderSong() {
+
+      const song =
+        document.getElementById("song");
+
+      song.innerHTML = "";
+
+      const lines =
+        songContent
+          .replace(/\r/g, "")
+          .split("\n");
+
+      lines.forEach(function(line) {
+
+        const trimmed = line.trim();
+
+        if (trimmed === "") {
+
+          const empty =
+            document.createElement("div");
+
+          empty.className =
+            "empty-line";
+
+          song.appendChild(empty);
+
+          return;
+        }
+
+        if (
+          trimmed.startsWith("[") &&
+          trimmed.endsWith("]")
+        ) {
+
+          const section =
+            document.createElement("div");
+
+          section.className =
+            "section";
+
+          section.textContent =
+            trimmed.slice(1, -1);
+
+          song.appendChild(section);
+
+          return;
+        }
+
+        if (isChordLine(line)) {
+
+          const chordLine =
+            document.createElement("div");
+
+          chordLine.className =
+            "chord-line";
+
+          chordLine.textContent =
+            transposeChordLine(line);
+
+          song.appendChild(chordLine);
+
+          return;
+        }
+
+        const lyricLine =
+          document.createElement("div");
+
+        lyricLine.className =
+          "lyric-line";
+
+        lyricLine.textContent =
+          line;
+
+        song.appendChild(lyricLine);
+
+      });
+
+      document.getElementById(
+        "keyDisplay"
+      ).textContent =
+        "Key: " +
+        transposeChord(
+          "Am",
+          transposeAmount
+        );
+    }
+
+
+    function changeFont(amount) {
+
+      fontSize += amount;
+
+      if (fontSize < 12) {
+        fontSize = 12;
+      }
+
+      if (fontSize > 28) {
+        fontSize = 28;
+      }
+
+      document.getElementById(
+        "song"
+      ).style.fontSize =
+        fontSize + "px";
+    }
+
+
+    function transpose(amount) {
+
+      transposeAmount += amount;
+
+      renderSong();
+    }
+
+
+    renderSong();
+
+  </script>
+
+</body>
+</html>
