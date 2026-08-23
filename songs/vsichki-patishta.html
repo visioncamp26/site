@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Всички пътища водят към теб — VISION '26</title>
+
+  <style>
+    :root {
+      --primary: #0B3D2E;
+      --secondary: #F4F1E8;
+      --white: #FFFFFF;
+      --text: #111111;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 12px;
+      background: var(--white);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
+
+    nav {
+      text-align: center;
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: var(--primary);
+      text-decoration: none;
+      margin: 0 7px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    #song-container {
+      width: 100%;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .header {
+      background: var(--primary);
+      color: var(--white);
+      padding: 16px;
+      border-radius: 10px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .header h1 {
+      margin: 0 0 5px;
+      font-size: 1.5rem;
+    }
+
+    .group {
+      opacity: 0.9;
+      margin-bottom: 3px;
+    }
+
+    #keyDisplay {
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .controls button {
+      flex: 1 1 calc(50% - 4px);
+      min-width: 0;
+      padding: 10px 6px;
+      border: none;
+      border-radius: 6px;
+      background: var(--primary);
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .controls button:hover {
+      opacity: 0.85;
+    }
+
+    #song {
+      background: var(--secondary);
+      padding: 15px;
+      border-radius: 10px;
+      font-family: "Courier New", Courier, monospace;
+      white-space: pre;
+      overflow-x: auto;
+      font-size: 16px;
+      line-height: 1.1;
+    }
+
+    .section {
+      color: var(--primary);
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      font-size: 1rem;
+      margin-top: 14px;
+      margin-bottom: 5px;
+    }
+
+    .chord-line {
+      color: var(--primary);
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    .lyric-line {
+      line-height: 1.15;
+    }
+
+    .empty-line {
+      height: 4px;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 7px;
+      }
+
+      #song {
+        padding: 11px;
+        font-size: 14px;
+      }
+
+      .header {
+        padding: 14px;
+      }
+
+      .header h1 {
+        font-size: 1.35rem;
+      }
+
+      .controls button {
+        padding: 9px 5px;
+        font-size: 13px;
+      }
+
+      .section {
+        margin-top: 12px;
+        margin-bottom: 4px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a href="../index.html">Начало</a> |
+    <a href="../vision2025-schedule.html">Програма</a> |
+    <a href="../songs.html">Песни</a>
+  </nav>
+
+  <div id="song-container">
+
+    <div class="header">
+      <h1>Всички пътища водят към теб</h1>
+      <div class="group">Боби и Рафи</div>
+      <div id="keyDisplay">Key: F</div>
+    </div>
+
+    <div class="controls">
+      <button onclick="changeFont(1)">A+</button>
+      <button onclick="changeFont(-1)">A−</button>
+      <button onclick="transpose(1)">Transpose +</button>
+      <button onclick="transpose(-1)">Transpose −</button>
+    </div>
+
+    <div id="song"></div>
+
+  </div>
+
+  <script>
+
+    const songContent = `
+[Куплет 1]
+
+F
+Стигнах дотук,
+A#
+вече съм друг.
+           D#                A#       C
+Колко въпроси още имам към теб, към теб.
+               A#      C      D#
+Знам, че си с мен и когато греша.
+             A#       C      D#
+Знам, че ме чуваш, когато мълча.
+      A#       C        D#
+Само този път води към теб,
+      A#       C        D#
+само този път води към теб.
+
+
+[Куплет 2]
+
+F
+Вече съм тук,
+A#
+Знам, че те чух.
+             D#              A#       C
+Пазил съм всичко, което със мен сподели.
+               A#      C      D#
+Знам, че си с мен и когато греша.
+               A#     C      D#
+Знам, че ме чуваш, когато мълча.
+        A#     C         D#
+Всички пътища водят към теб,
+        A#     C         D#
+всички пътища водят към теб.
+
+
+[Припев]
+
+A#        C        D#
+Истината винаги за мен ще си ти,
+A#         C       D#
+твоят дух със огън вътре в мен гори.
+A#          C       D#
+Важно беше само да вървя напред,
+       A#      C        D#
+всички пътища водят към теб.
+
+
+[Куплет 2]
+
+F
+Още си тук,
+A#
+никога друг.
+        D#              A#       C
+Винаги същият, както преди – до мен.
+               A#      C      D#
+Знам, че си с мен и когато греша.
+             A#       C      D#
+Знам, че ме чуваш, когато мълча.
+      A#       C        D#
+Само този път води към теб,
+      A#       C        D#
+само този път води към теб.
+`;
+
+
+    const chromatic = [
+      "C", "C#", "D", "D#", "E", "F",
+      "F#", "G", "G#", "A", "A#", "B"
+    ];
+
+    const flatMap = {
+      "Db": "C#",
+      "Eb": "D#",
+      "Gb": "F#",
+      "Ab": "G#",
+      "Bb": "A#"
+    };
+
+    let transposeAmount = 0;
+    let fontSize = 16;
+
+
+    function transposeChord(chord, amount) {
+
+      const match = chord.match(
+        /^([A-G](?:#|b)?)(m?)$/
+      );
+
+      if (!match) {
+        return chord;
+      }
+
+      let root = match[1];
+      const suffix = match[2];
+
+      root = flatMap[root] || root;
+
+      let index = chromatic.indexOf(root);
+
+      if (index === -1) {
+        return chord;
+      }
+
+      index =
+        (index + amount + 12) % 12;
+
+      return chromatic[index] + suffix;
+    }
+
+
+    function transposeChordLine(line) {
+
+      return line.replace(
+        /(?<![A-Za-z])([A-G](?:#|b)?m?)(?![A-Za-z])/g,
+        function(match) {
+          return transposeChord(
+            match,
+            transposeAmount
+          );
+        }
+      );
+    }
+
+
+    function isChordLine(line) {
+
+      const trimmed = line.trim();
+
+      if (!trimmed) {
+        return false;
+      }
+
+      const parts = trimmed.split(/\s+/);
+
+      return parts.every(function(part) {
+        return /^[A-G](?:#|b)?m?$/.test(part);
+      });
+    }
+
+
+    function renderSong() {
+
+      const song =
+        document.getElementById("song");
+
+      song.innerHTML = "";
+
+      const lines =
+        songContent
+          .replace(/\r/g, "")
+          .split("\n");
+
+      lines.forEach(function(line) {
+
+        const trimmed = line.trim();
+
+
+        if (trimmed === "") {
+
+          const empty =
+            document.createElement("div");
+
+          empty.className =
+            "empty-line";
+
+          song.appendChild(empty);
+
+          return;
+        }
+
+
+        if (
+          trimmed.startsWith("[") &&
+          trimmed.endsWith("]")
+        ) {
+
+          const section =
+            document.createElement("div");
+
+          section.className =
+            "section";
+
+          section.textContent =
+            trimmed.slice(1, -1);
+
+          song.appendChild(section);
+
+          return;
+        }
+
+
+        if (isChordLine(line)) {
+
+          const chordLine =
+            document.createElement("div");
+
+          chordLine.className =
+            "chord-line";
+
+          chordLine.textContent =
+            transposeChordLine(line);
+
+          song.appendChild(chordLine);
+
+          return;
+        }
+
+
+        const lyricLine =
+          document.createElement("div");
+
+        lyricLine.className =
+          "lyric-line";
+
+        lyricLine.textContent =
+          line;
+
+        song.appendChild(lyricLine);
+
+      });
+
+
+      document.getElementById(
+        "keyDisplay"
+      ).textContent =
+        "Key: " +
+        transposeChord(
+          "F",
+          transposeAmount
+        );
+    }
+
+
+    function changeFont(amount) {
+
+      fontSize += amount;
+
+      if (fontSize < 12) {
+        fontSize = 12;
+      }
+
+      if (fontSize > 28) {
+        fontSize = 28;
+      }
+
+      document.getElementById(
+        "song"
+      ).style.fontSize =
+        fontSize + "px";
+    }
+
+
+    function transpose(amount) {
+
+      transposeAmount += amount;
+
+      renderSong();
+    }
+
+
+    renderSong();
+
+  </script>
+
+</body>
+</html>
